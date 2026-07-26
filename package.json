@@ -13,6 +13,7 @@
     "@upstash/redis": "^1.38.0",
     "@vercel/blob": "^2.6.1",
     "@vercel/postgres": "^0.10.0",
+    "bcrypt": "^6.0.0",
     "drizzle-orm": "^0.45.2",
     "jose": "^6.2.4",
     "next": "16.2.12",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

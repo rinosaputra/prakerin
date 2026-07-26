@@ -13,12 +13,12 @@
 
 ## 2. Authentication & RBAC Core
 
-- [ ] 2.1 Create src/app/(auth)/login/page.tsx with email/password login form
-- [ ] 2.2 Implement src/app/(auth)/login/route.ts Server Action: validate credentials against users table, verify password with bcrypt, issue JWT session cookie via jose
-- [ ] 2.3 Implement middleware src/middleware.ts with role-based route protection using ROLE_PATTERNS regex per user role
-- [ ] 2.4 Create src/lib/auth/session.ts utility: createSession(userId, role), getSession(token), deleteSession()
-- [ ] 2.5 Seed initial admin TU user into database (seed.ts) with bcrypt-hashed password
-- [ ] 2.6 Add role dropdown in login page and RBAC table component (src/components/RBACGuard.tsx)
+- [x] 2.1 Create src/app/(auth)/login/page.tsx with email/password login form
+- [x] 2.2 Implement src/app/api/auth/login/route.ts API handler: validate credentials against users table, verify password with bcrypt, issue JWT session cookie via jose
+- [x] 2.3 Implement middleware src/middleware.ts with role-based route protection using ROLE_PATTERNS regex per user role
+- [x] 2.4 Create src/lib/auth/session.ts utility: createSession(userId, role), getSession(token), deleteSession()
+- [x] 2.5 Seed initial admin TU user into database (seed.ts) with bcrypt-hashed password
+- [x] 2.6 Add role dropdown in login page and RBAC table component (src/components/RBACGuard.tsx)
 - [ ] 2.7 Test all 6 roles can access and are blocked from appropriate routes
 - [ ] 2.8 Verify unauthorized access returns 302 redirect to /unauthorized
 
