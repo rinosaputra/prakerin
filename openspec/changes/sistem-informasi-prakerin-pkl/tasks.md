@@ -5,11 +5,11 @@
 - [x] 1.1 Initialize Next.js 15+ project with App Router, TypeScript, and Tailwind CSS
 - [x] 1.2 Install dependencies: drizzle-orm, @vercel/postgres, @vercel/blob, @upstash/redis, @react-pdf/renderer, jose, qrcode, drizzle-kit (dev)
 - [x] 1.3 Configure environment variables (.env.local): DATABASE_URL, BLOB_READ_WRITE_TOKEN, KV_REST_API_URL, KV_REST_API_TOKEN, JWT_SECRET, CRON_SECRET
-- [ ] 1.4 Create Drizzle config (drizzle.config.ts) for schema migrations
-- [ ] 1.5 Initialize lib/db/index.ts with database connection using @vercel/postgres + drizzle-orm
-- [ ] 1.6 Create src/lib/schema.ts with all 10 table definitions (users, dudika, kuota_dudika, ploting_siswa, presensi, jurnal_harian, surats, evaluasi_dudika, sertifikat, audit_logs) and enum types
-- [ ] 1.7 Run `drizzle-kit generate` and `drizzle-kit push` to apply initial schema migration to Vercel Postgres
-- [ ] 1.8 Verify database tables exist with correct indexes, unique constraints, and foreign key relationships
+- [x] 1.4 Create Drizzle config (drizzle.config.ts) for schema migrations
+- [x] 1.5 Initialize lib/db/index.ts with database connection using @vercel/postgres + drizzle-orm
+- [x] 1.6 Create src/lib/schema.ts with all 10 table definitions (users, dudika, kuota_dudika, ploting_siswa, presensi, jurnal_harian, surats, evaluasi_dudika, sertifikat, audit_logs) and enum types
+- [x] 1.7 Run `drizzle-kit generate` and `drizzle-kit push` to apply initial schema migration to Vercel Postgres
+- [x] 1.8 Verify database tables exist with correct indexes, unique constraints, and foreign key relationships
 
 ## 2. Authentication & RBAC Core
 

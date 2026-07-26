@@ -1,0 +1,1339 @@
+{
+  "id": "5a55eaf6-6286-4d78-983c-8e9f566eb3d3",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.audit_logs": {
+      "name": "audit_logs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "actor_id": {
+          "name": "actor_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "action": {
+          "name": "action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "target_entity": {
+          "name": "target_entity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "target_id": {
+          "name": "target_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payload_before": {
+          "name": "payload_before",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payload_after": {
+          "name": "payload_after",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "by_target_entity_id": {
+          "name": "by_target_entity_id",
+          "columns": [
+            {
+              "expression": "target_entity",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "target_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "by_actor": {
+          "name": "by_actor",
+          "columns": [
+            {
+              "expression": "actor_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "audit_logs_actor_id_users_id_fk": {
+          "name": "audit_logs_actor_id_users_id_fk",
+          "tableFrom": "audit_logs",
+          "tableTo": "users",
+          "columnsFrom": [
+            "actor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dudika": {
+      "name": "dudika",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nama_perusahaan": {
+          "name": "nama_perusahaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat": {
+          "name": "alamat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(10, 8)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(11, 8)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "radius_meter": {
+          "name": "radius_meter",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 100
+        },
+        "nama_penanggung_jawab": {
+          "name": "nama_penanggung_jawab",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_person_phone": {
+          "name": "contact_person_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.evaluasi_dudika": {
+      "name": "evaluasi_dudika",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ploting_id": {
+          "name": "ploting_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nilai_soft_skill": {
+          "name": "nilai_soft_skill",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nilai_hard_skill": {
+          "name": "nilai_hard_skill",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nilai_akhir": {
+          "name": "nilai_akhir",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "predikat": {
+          "name": "predikat",
+          "type": "evaluation_predikat",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "catatan_performa": {
+          "name": "catatan_performa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evaluated_at": {
+          "name": "evaluated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "evaluasi_dudika_ploting_id_ploting_siswa_id_fk": {
+          "name": "evaluasi_dudika_ploting_id_ploting_siswa_id_fk",
+          "tableFrom": "evaluasi_dudika",
+          "tableTo": "ploting_siswa",
+          "columnsFrom": [
+            "ploting_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "evaluasi_dudika_ploting_id_unique": {
+          "name": "evaluasi_dudika_ploting_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "ploting_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.jurnal_harian": {
+      "name": "jurnal_harian",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ploting_id": {
+          "name": "ploting_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal": {
+          "name": "tanggal",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deskripsi_pekerjaan": {
+          "name": "deskripsi_pekerjaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "foto_kegiatan_url": {
+          "name": "foto_kegiatan_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_verified_guru": {
+          "name": "is_verified_guru",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "is_verified_instruktur": {
+          "name": "is_verified_instruktur",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "catatan_revisi": {
+          "name": "catatan_revisi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "by_ploting_tanggal": {
+          "name": "by_ploting_tanggal",
+          "columns": [
+            {
+              "expression": "ploting_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "tanggal",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "jurnal_harian_ploting_id_ploting_siswa_id_fk": {
+          "name": "jurnal_harian_ploting_id_ploting_siswa_id_fk",
+          "tableFrom": "jurnal_harian",
+          "tableTo": "ploting_siswa",
+          "columnsFrom": [
+            "ploting_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kasus_siswa": {
+      "name": "kasus_siswa",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ploting_id": {
+          "name": "ploting_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guru_id": {
+          "name": "guru_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deskripsi": {
+          "name": "deskripsi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tindakan": {
+          "name": "tindakan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "severity": {
+          "name": "severity",
+          "type": "case_severity",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "kasus_siswa_ploting_id_ploting_siswa_id_fk": {
+          "name": "kasus_siswa_ploting_id_ploting_siswa_id_fk",
+          "tableFrom": "kasus_siswa",
+          "tableTo": "ploting_siswa",
+          "columnsFrom": [
+            "ploting_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "kasus_siswa_guru_id_users_id_fk": {
+          "name": "kasus_siswa_guru_id_users_id_fk",
+          "tableFrom": "kasus_siswa",
+          "tableTo": "users",
+          "columnsFrom": [
+            "guru_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kunjungan_monitoring": {
+      "name": "kunjungan_monitoring",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ploting_id": {
+          "name": "ploting_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guru_id": {
+          "name": "guru_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_kunjungan": {
+          "name": "tanggal_kunjungan",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "catatan": {
+          "name": "catatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "observasi": {
+          "name": "observasi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "kunjungan_monitoring_ploting_id_ploting_siswa_id_fk": {
+          "name": "kunjungan_monitoring_ploting_id_ploting_siswa_id_fk",
+          "tableFrom": "kunjungan_monitoring",
+          "tableTo": "ploting_siswa",
+          "columnsFrom": [
+            "ploting_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "kunjungan_monitoring_guru_id_users_id_fk": {
+          "name": "kunjungan_monitoring_guru_id_users_id_fk",
+          "tableFrom": "kunjungan_monitoring",
+          "tableTo": "users",
+          "columnsFrom": [
+            "guru_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kuota_dudika": {
+      "name": "kuota_dudika",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "dudika_id": {
+          "name": "dudika_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jurusan": {
+          "name": "jurusan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tahun_ajaran": {
+          "name": "tahun_ajaran",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jumlah_kuota": {
+          "name": "jumlah_kuota",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "terpakai": {
+          "name": "terpakai",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "unique_dudika_jurusan_tahun": {
+          "name": "unique_dudika_jurusan_tahun",
+          "columns": [
+            {
+              "expression": "dudika_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "jurusan",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "tahun_ajaran",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "kuota_dudika_dudika_id_dudika_id_fk": {
+          "name": "kuota_dudika_dudika_id_dudika_id_fk",
+          "tableFrom": "kuota_dudika",
+          "tableTo": "dudika",
+          "columnsFrom": [
+            "dudika_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ploting_siswa": {
+      "name": "ploting_siswa",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "siswa_user_id": {
+          "name": "siswa_user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dudika_id": {
+          "name": "dudika_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guru_pembimbing_id": {
+          "name": "guru_pembimbing_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "instruktur_id": {
+          "name": "instruktur_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanggal_mulai": {
+          "name": "tanggal_mulai",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_selesai": {
+          "name": "tanggal_selesai",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_aktif": {
+          "name": "status_aktif",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ploting_siswa_siswa_user_id_users_id_fk": {
+          "name": "ploting_siswa_siswa_user_id_users_id_fk",
+          "tableFrom": "ploting_siswa",
+          "tableTo": "users",
+          "columnsFrom": [
+            "siswa_user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ploting_siswa_dudika_id_dudika_id_fk": {
+          "name": "ploting_siswa_dudika_id_dudika_id_fk",
+          "tableFrom": "ploting_siswa",
+          "tableTo": "dudika",
+          "columnsFrom": [
+            "dudika_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ploting_siswa_guru_pembimbing_id_users_id_fk": {
+          "name": "ploting_siswa_guru_pembimbing_id_users_id_fk",
+          "tableFrom": "ploting_siswa",
+          "tableTo": "users",
+          "columnsFrom": [
+            "guru_pembimbing_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ploting_siswa_instruktur_id_users_id_fk": {
+          "name": "ploting_siswa_instruktur_id_users_id_fk",
+          "tableFrom": "ploting_siswa",
+          "tableTo": "users",
+          "columnsFrom": [
+            "instruktur_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.presensi": {
+      "name": "presensi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ploting_id": {
+          "name": "ploting_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal": {
+          "name": "tanggal",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "waktu_masuk": {
+          "name": "waktu_masuk",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "waktu_keluar": {
+          "name": "waktu_keluar",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "attendance_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'HADIR'"
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(10, 8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(11, 8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_within_radius": {
+          "name": "is_within_radius",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "jarak_meter": {
+          "name": "jarak_meter",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "catatan": {
+          "name": "catatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "foto_masuk_url": {
+          "name": "foto_masuk_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "unique_ploting_tanggal": {
+          "name": "unique_ploting_tanggal",
+          "columns": [
+            {
+              "expression": "ploting_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "tanggal",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "presensi_ploting_id_ploting_siswa_id_fk": {
+          "name": "presensi_ploting_id_ploting_siswa_id_fk",
+          "tableFrom": "presensi",
+          "tableTo": "ploting_siswa",
+          "columnsFrom": [
+            "ploting_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sertifikat": {
+      "name": "sertifikat",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nomor_sertifikat": {
+          "name": "nomor_sertifikat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ploting_id": {
+          "name": "ploting_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "file_url": {
+          "name": "file_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "document_hash": {
+          "name": "document_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nilai_akhir": {
+          "name": "nilai_akhir",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "predikat": {
+          "name": "predikat",
+          "type": "evaluation_predikat",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "issued_at": {
+          "name": "issued_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sertifikat_ploting_id_ploting_siswa_id_fk": {
+          "name": "sertifikat_ploting_id_ploting_siswa_id_fk",
+          "tableFrom": "sertifikat",
+          "tableTo": "ploting_siswa",
+          "columnsFrom": [
+            "ploting_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sertifikat_nomor_sertifikat_unique": {
+          "name": "sertifikat_nomor_sertifikat_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nomor_sertifikat"
+          ]
+        },
+        "sertifikat_document_hash_unique": {
+          "name": "sertifikat_document_hash_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "document_hash"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surats": {
+      "name": "surats",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nomor_surat": {
+          "name": "nomor_surat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jenis": {
+          "name": "jenis",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "document_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'DRAFT'"
+        },
+        "tujuan": {
+          "name": "tujuan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isi": {
+          "name": "isi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_url": {
+          "name": "file_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "document_hash": {
+          "name": "document_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "surats_nomor_surat_unique": {
+          "name": "surats_nomor_surat_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nomor_surat"
+          ]
+        },
+        "surats_document_hash_unique": {
+          "name": "surats_document_hash_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "document_hash"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "user_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_lengkap": {
+          "name": "nama_lengkap",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nisn": {
+          "name": "nisn",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nip": {
+          "name": "nip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dudika_id": {
+          "name": "dudika_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_dudika_id_dudika_id_fk": {
+          "name": "users_dudika_id_dudika_id_fk",
+          "tableFrom": "users",
+          "tableTo": "dudika",
+          "columnsFrom": [
+            "dudika_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.attendance_status": {
+      "name": "attendance_status",
+      "schema": "public",
+      "values": [
+        "HADIR",
+        "IZIN",
+        "SAKIT",
+        "ALPHA"
+      ]
+    },
+    "public.case_severity": {
+      "name": "case_severity",
+      "schema": "public",
+      "values": [
+        "ringan",
+        "sedang",
+        "berat"
+      ]
+    },
+    "public.document_status": {
+      "name": "document_status",
+      "schema": "public",
+      "values": [
+        "DRAFT",
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "REJECTED",
+        "ISSUED"
+      ]
+    },
+    "public.evaluation_predikat": {
+      "name": "evaluation_predikat",
+      "schema": "public",
+      "values": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "public.user_role": {
+      "name": "user_role",
+      "schema": "public",
+      "values": [
+        "ADMIN_TU",
+        "WAKA_HUBIN",
+        "KAPROGLI",
+        "GURU_PEMBIMBING",
+        "SISWA",
+        "INSTRUKTUR_DUDIKA"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
